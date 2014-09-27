@@ -79,7 +79,6 @@ Coluna * listaDeColunas = NULL;
 
 Coluna* criarColuna() {
     return (Coluna*) malloc(sizeof(Coluna));
-    getch();
 }
 
 DataType * criarDataType(int sgbd, int tipo){
