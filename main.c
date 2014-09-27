@@ -218,20 +218,20 @@ int main () {
 
 void cls()
 {
- HANDLE hCon = GetStdHandle(STD_OUTPUT_HANDLE);
+	HANDLE hCon = GetStdHandle(STD_OUTPUT_HANDLE);
 
- CONSOLE_SCREEN_BUFFER_INFO info;
- GetConsoleScreenBufferInfo( hCon, &info );
+	CONSOLE_SCREEN_BUFFER_INFO info;
+	GetConsoleScreenBufferInfo( hCon, &info );
 
- COORD home = { 0, 0 };
- DWORD nchars = (DWORD)info.dwSize.X * info.dwSize.Y;
- DWORD nwritten;
+	COORD home = { 0, 0 };
+	DWORD nchars = (DWORD)info.dwSize.X * info.dwSize.Y;
+	DWORD nwritten;
 
- // Fill the entire screen with blanks.
+	// Fill the entire screen with blanks.
 
- FillConsoleOutputCharacter( hCon, ' ', nchars, home, &nwritten );
- FillConsoleOutputAttribute( hCon, info.wAttributes, nchars, home, &nwritten);
+	FillConsoleOutputCharacter( hCon, ' ', nchars, home, &nwritten );
+	FillConsoleOutputAttribute( hCon, info.wAttributes, nchars, home, &nwritten);
 
- SetConsoleCursorPosition( hCon, home );
+	SetConsoleCursorPosition( hCon, home );
 }
 
