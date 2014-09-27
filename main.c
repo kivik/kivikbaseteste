@@ -78,7 +78,7 @@ Coluna * listaDeColunas = NULL;
 
 ========================================= */
 
-Coluna* criarColuna() {
+Coluna * criarColuna() {
     return (Coluna*) malloc(sizeof(Coluna));
 }
 
@@ -90,8 +90,8 @@ DataType * criarDataType(int sgbd, int tipo){
     }
 }
 
-DataType* criarDataTypeMySQL(int sgbd){
-    DataType *dataType = (DataType*) malloc(sizeof(DataType));
+DataType * criarDataTypeMySQL(int sgbd){
+    DataType * dataType = (DataType*) malloc(sizeof(DataType));
     dataType->SGBD = sgbd;
     
     switch(tipo){
@@ -116,22 +116,21 @@ DataType* criarDataTypeMySQL(int sgbd){
 */
 void inserirColuna() {
     char addcol[50];
-    char *tipo;
+    char * tipo;
     char addtipo;
     int i, cont;
-    Coluna *colunaAux, *novo;
+    Coluna * colunaAux, * novo;
 
     printf ("\nPrimeira coluna eh primary key, number e randomica.\n\n");
 
 	printf ("Digite o nome da coluna: ");
 	scanf ("%s", &addcol);
 	printf ("Digite V para continuar.");
-//        fflush(stdio);
 	scanf ("%s", &tipo);
 
 	novo = (Coluna*)malloc(sizeof(Coluna));
 	memcpy(novo->nome, addcol, 50);
-    novo->tipo = criarDataType(SGBD_MYSQL, MYSQL_CHAR);
+	novo->tipo = criarDataType(SGBD_MYSQL, MYSQL_CHAR);
 
 	novo -> prox = NULL;
 	if(listaDeColunas == NULL){
@@ -149,7 +148,7 @@ void primarykey(void){
 }
 
 void gerarCreateTable(){
-	Coluna *colunaAux;
+	Coluna * colunaAux;
 	aux = listaDeColunas;
 	while (colunaAux != NULL){
 		printf ("\n %s varchar2,", aux -> nome);
@@ -166,7 +165,7 @@ void exibirCabecalho(){
 }
 
 void gerarInserts(){
-	col *aux;
+	col * aux;
 	aux = listaDeColunas;
 
 	while (aux != NULL){
@@ -212,7 +211,7 @@ int main () {
 	printf ("insert into %s (", tabela);
 	gerarInserts();
 
- getch();
+	getch();
 	return 0;
 }
 
