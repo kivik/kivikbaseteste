@@ -78,6 +78,13 @@ Coluna * listaDeColunas = NULL;
 
 ========================================= */
 
+Tabela * criarTabela(char nome){
+	Tabela * tabela =  malloc(sizeof(Tabela));
+	tabela->nome = nome;
+	tabela->colunas = NULL;
+	return tabela;
+}
+
 Coluna * criarColuna() {
     return (Coluna*) malloc(sizeof(Coluna));
 }
@@ -182,13 +189,14 @@ void gerarInserts(){
 void cls();
 
 int main () {
-	char tabela[50];
+	Tabela * tabela;
 	int qtdColunas=0;
+	char tabelaNome[TAM_NOME_TAB];
 
 	exibirCabecalho();
 
 	printf ("Nome da tabela: ");
-	scanf ("%s", &tabela);
+	tabela = criarTabela(gets());
 
 	criarListaDeColunas();
 
