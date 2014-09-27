@@ -82,10 +82,18 @@ Coluna* criarColuna() {
     getch();
 }
 
-DataType* criarDataType(int sgbd, int tipo){
+DataType * criarDataType(int sgbd, int tipo){
+    switch(sgbd){
+	case SGBD_MYSQL:
+		return criarDataTypeMySQL(tipo);
+		break;
+    }
+}
+
+DataType* criarDataTypeMySQL(int sgbd){
     DataType *dataType = (DataType*) malloc(sizeof(DataType));
     dataType->SGBD = sgbd;
-
+    
     switch(tipo){
         case MYSQL_CHAR:
             dataType->tipo = C_CHAR;
