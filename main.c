@@ -21,6 +21,7 @@
 // Tipos de dados da linguagem C
 #define C_CHAR 1
 #define C_INT 2
+#define C_FLOAT 3
 
 /** ===================================
 
