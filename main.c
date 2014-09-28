@@ -76,6 +76,7 @@ struct Tabela{
 
 ====================================== */
 
+Database * database = NULL;
 Tabela * tabelas = NULL;
 
 /** ======================================
@@ -83,6 +84,13 @@ Tabela * tabelas = NULL;
     Funções para manipulação da tabela
 
 ========================================= */
+
+Database * criarDatabase(){
+    Database * database = (Database*) malloc(sizeof(Database));
+    database->host = NULL;
+    database->usuario = NULL;
+    database->senha = NULL;
+}
 
 /*
 	Retorna uma tabela com nome
