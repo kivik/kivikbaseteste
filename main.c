@@ -90,6 +90,7 @@ Database * criarDatabase(){
     database->host = NULL;
     database->usuario = NULL;
     database->senha = NULL;
+    return database;
 }
 
 /*
