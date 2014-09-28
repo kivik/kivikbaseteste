@@ -35,6 +35,12 @@ typedef struct DataType DataType;
 typedef struct ConstraintFK ConstraintFK;
 typedef struct ConstraintPK ConstraintPK;
 
+struct Database{
+    char host[100];
+    char usuario[80];
+    char senha[80];
+}
+
 struct DataType{
     short SGBD;
     short tipo;//tipo em c. char, int, short...
@@ -66,18 +72,21 @@ struct Tabela{
 
 /** ===================================
 
-            Vari·veis globais
+            Vari√°veis globais
 
 ====================================== */
 
-Coluna * listaDeColunas = NULL;
+Tabela * tabelas = NULL;
 
 /** ======================================
 
-    FunÁıes para manipulaÁ„o da tabela
+    Fun√ß√µes para manipula√ß√£o da tabela
 
 ========================================= */
 
+/*
+	Retorna uma tabela com nome
+*/
 Tabela * criarTabela(char nome){
 	Tabela * tabela =  malloc(sizeof(Tabela));
 	tabela->nome = nome;
@@ -100,7 +109,7 @@ DataType * criarDataType(int sgbd, int tipo){
 DataType * criarDataTypeMySQL(int sgbd){
     DataType * dataType = (DataType*) malloc(sizeof(DataType));
     dataType->SGBD = sgbd;
-    
+
     switch(tipo){
         case MYSQL_CHAR:
             dataType->tipo = C_CHAR;
@@ -119,7 +128,7 @@ DataType * criarDataTypeMySQL(int sgbd){
 }
 
 /*
-	Insere coluna no final da lista din‚mica
+	Insere coluna no final da lista din√¢mica
 */
 void inserirColuna() {
     char addcol[50];
@@ -186,12 +195,19 @@ void gerarInserts(){
 	getch();
 }
 
+int mainUserInteraction(int argc, char *argv[]){
+
+}
+
+int mainMachineInteraction(int argc, char *argv[]){
+
+}
+
 void cls();
 
-int main () {
+int main (int argc, char *argv[]) {
 	Tabela * tabela;
 	int qtdColunas=0;
-	char tabelaNome[TAM_NOME_TAB];
 
 	exibirCabecalho();
 
