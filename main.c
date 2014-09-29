@@ -39,7 +39,7 @@ struct Database{
     char host[100];
     char usuario[80];
     char senha[80];
-}
+};
 
 struct DataType{
     short SGBD;
@@ -70,15 +70,6 @@ struct Tabela{
     Coluna * colunas;
 };
 
-/** ===================================
-
-            Variáveis globais
-
-====================================== */
-
-Database * database = NULL;
-Tabela * tabelas = NULL;
-
 /** ======================================
 
     Funções para manipulação da tabela
@@ -98,7 +89,7 @@ Database * criarDatabase(){
 */
 Tabela * criarTabela(char nome){
 	Tabela * tabela =  malloc(sizeof(Tabela));
-	tabela->nome = nome;
+	strcmp(tabela->nome, nome);
 	tabela->colunas = NULL;
 	return tabela;
 }
