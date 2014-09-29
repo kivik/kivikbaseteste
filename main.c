@@ -44,7 +44,8 @@ struct Database{
 
 struct DataType{
     short SGBD;
-    short tipo;//tipo em c. char, int, short...
+    short tipoSGBD;
+    short tipoC;
 };
 
 struct ConstraintFK{
@@ -88,7 +89,7 @@ Database * criarDatabase(){
 /*
 	Retorna uma tabela com nome
 */
-Tabela * criarTabela(char nome){
+Tabela * criarTabela(char nome[]){
 	Tabela * tabela = (Tabela*) malloc(sizeof(Tabela));
 	strcpy(tabela->nome, nome);
 	tabela->colunas = NULL;
@@ -99,33 +100,37 @@ Coluna * criarColuna() {
     return (Coluna*) malloc(sizeof(Coluna));
 }
 
-DataType * criarDataType(int sgbd, int tipo){
-    switch(sgbd){
-	case SGBD_MYSQL:
-		return criarDataTypeMySQL(tipo);
-		break;
-    }
-}
-
-DataType * criarDataTypeMySQL(int sgbd){
-    DataType * dataType = (DataType*) malloc(sizeof(DataType));
-    dataType->SGBD = sgbd;
-
-    switch(tipo){
+DataType * convertToDataTypeMySQL(DataType * dataType){
+    switch(dataType->tipoSGBD){
         case MYSQL_CHAR:
-            dataType->tipo = C_CHAR;
+            dataType->tipoC = C_CHAR;
             break;
 
         case MYSQL_INT:
-            dataType->tipo = C_INT;
+            dataType->tipoC = C_INT;
             break;
 
         case MYSQL_VARCHAR:
-            dataType->tipo = C_CHAR;
+            dataType->tipoC = C_CHAR;
             break;
     }
 
     return dataType;
+}
+
+DataType * criarDataType(int sgbd, int tipoSGBD){
+	DataType * dataType = (DataType*) malloc(sizeof(DataType));
+	dataType->SGBD = sgbd;
+	dataType->tipoSGBD = tipoSGBD;
+	dataType->tipoC = 0;
+
+    switch(dataType->SGBD){
+		case SGBD_MYSQL:
+			return convertToDataTypeMySQL(dataType);
+			break;
+		default:
+			return NULL;
+    }
 }
 
 /*
