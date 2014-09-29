@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 /** ===================================
 
@@ -78,9 +79,9 @@ struct Tabela{
 
 Database * criarDatabase(){
     Database * database = (Database*) malloc(sizeof(Database));
-    database->host = NULL;
-    database->usuario = NULL;
-    database->senha = NULL;
+    strcpy(database->host,"");
+    strcpy(database->usuario, "");
+    strcpy(database->senha, "");
     return database;
 }
 
@@ -88,8 +89,8 @@ Database * criarDatabase(){
 	Retorna uma tabela com nome
 */
 Tabela * criarTabela(char nome){
-	Tabela * tabela =  malloc(sizeof(Tabela));
-	strcmp(tabela->nome, nome);
+	Tabela * tabela = malloc(sizeof(Tabela));
+	strcpy(tabela->nome, nome);
 	tabela->colunas = NULL;
 	return tabela;
 }
