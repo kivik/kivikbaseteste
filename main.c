@@ -89,7 +89,7 @@ Database * criarDatabase(){
 	Retorna uma tabela com nome
 */
 Tabela * criarTabela(char nome){
-	Tabela * tabela = malloc(sizeof(Tabela));
+	Tabela * tabela = (Tabela*) malloc(sizeof(Tabela));
 	strcpy(tabela->nome, nome);
 	tabela->colunas = NULL;
 	return tabela;
