@@ -36,24 +36,24 @@ main (void) {
 
 	exibirCabecalho();
 	
-	printf ("Nome da tabela: "); // versões futuras numero de tabelas será aleatório
+	printf ("Nome da tabela: ");
 	scanf ("%s", &tabela);
 	
 // cria lista vazia
     listaDeColunas = NULL;
     printf ("\nColunas prontas para serem inseridas");
 
-	printf ("\n\nDigite 10 para gerar 10 colunas: "); // versões futuras numero de colunas será aleatório
+	printf ("\n\nInserir numero de colunas: ");
 	scanf ("%d", &qtdColunas);
 	
-	printf ("\nPrimeira coluna eh primary key.\n\n"); 
+	printf ("\nPrimeira coluna eh primary key, number e randomica.\n\n"); 
 	
 	for (cont=0; cont<qtdColunas; cont++){
     //col *aux, *novo;
 
-	printf ("Digite o nome da coluna: "); // versões futuras nome da coluna será gerado randomicamente
+	printf ("Digite o nome da coluna: ");
 	scanf ("%s", &addcol);
-	printf ("insira alguma variavel do tipo char: "); // versões futuras poderá escolher tipo da variavel nesse momento
+	printf ("insira alguma variavel do tipo char: ");
 //        fflush(stdio);
 	scanf ("%s", &tipo);
 
@@ -81,13 +81,13 @@ main (void) {
 	//col *aux; 
 	aux = listaDeColunas;
 	while (aux != NULL){
-		printf ("\n %s varchar2,", aux -> nome); // versões futuras criar cases para tipo de variavel (recomendavel aqui)
+		printf ("\n %s varchar2,", aux -> nome);
 		aux = aux -> prox;
 	}
 	
 	fprintf(stdout, "\nPRIMARY KEY (%s)\n);\n\n", listaDeColunas->nome);
 	
-	printf ("//insira quantidade de dados a serem criados: "); // aparece no arquivo texto
+	printf ("//insira quantidade de dados a serem criados: ");
 	scanf ("%d", &quant_dados);
 	
 	for (i=quant_dados; i>=1; i--)
@@ -100,8 +100,7 @@ main (void) {
 
 		while (aux != NULL){
 			if(aux -> prox == NULL){
-				printf ("%s) VALUES ( %d, 'kivik%d', 'kivik%d', '%dkivik', 'kivik%d', '%dkivik', 'kivik%d', '%dkivik', 'kivik%d', '%dkivik');"
-				, aux -> nome, i, rand() % 2000, rand() % 2000, rand() % 2000, rand() % 2000, rand() % 2000, rand() % 2000, rand() % 2000, rand() % 2000, rand() % 2000);
+				printf ("%s) VALUES ( %d, ", aux -> nome, i );
 			}else{
 				printf ("%s,", aux -> nome );      
 			}
