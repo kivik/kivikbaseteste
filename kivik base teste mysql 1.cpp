@@ -76,37 +76,50 @@ main (void) {
 	
 	exibirCabecalho();
 	
-	printf ("\ncreate table %s (", tabela);
+	/*
+
+
+fprintf(fp, "texto que vai ser salvo\n");
+
+
+	*/
+	FILE *fp = fopen("kivik.txt", "a+");
+	
+	if (fp) {
+	
+	fprintf (fp, "\ncreate table %s (", tabela);
 	
 	//col *aux; 
 	aux = listaDeColunas;
 	while (aux != NULL){
-		printf ("\n %s varchar2,", aux -> nome); // versões futuras criar cases para tipo de variavel (recomendavel aqui)
+		fprintf (fp, "\n %s varchar2,", aux -> nome); // versões futuras criar cases para tipo de variavel (recomendavel aqui)
 		aux = aux -> prox;
 	}
 	
-	fprintf(stdout, "\nPRIMARY KEY (%s)\n);\n\n", listaDeColunas->nome);
+	fprintf(fp, "\nPRIMARY KEY (%s)\n);\n\n", listaDeColunas->nome);
 	
-	printf ("//insira quantidade de dados a serem criados: "); // aparece no arquivo texto
+	printf ( "insira quantidade de dados a serem criados: ");
 	scanf ("%d", &quant_dados);
 	
 	for (i=quant_dados; i>=1; i--)
 	{
 	
-	printf ("\ninsert into %s (", tabela);
+	fprintf (fp, "\ninsert into %s (", tabela);
 	
 //	col *aux; 
 	aux = listaDeColunas;
 
 		while (aux != NULL){
 			if(aux -> prox == NULL){
-				printf ("%s) VALUES ( %d, 'kivik%d', 'kivik%d', '%dkivik', 'kivik%d', '%dkivik', 'kivik%d', '%dkivik', 'kivik%d', '%dkivik');"
+				fprintf (fp, "%s) VALUES ( %d, 'kivik%d', 'kivik%d', '%dkivik', 'kivik%d', '%dkivik', 'kivik%d', '%dkivik', 'kivik%d', '%dkivik');"
 				, aux -> nome, i, rand() % 2000, rand() % 2000, rand() % 2000, rand() % 2000, rand() % 2000, rand() % 2000, rand() % 2000, rand() % 2000, rand() % 2000);
 			}else{
-				printf ("%s,", aux -> nome );      
+				fprintf (fp, "%s,", aux -> nome );      
 			}
 			aux = aux -> prox;
 		}
+	}
+	fclose(fp);
 	}
 	
 	 getch();
