@@ -76,13 +76,7 @@ main (void) {
 	
 	exibirCabecalho();
 	
-	/*
 
-
-fprintf(fp, "texto que vai ser salvo\n");
-
-
-	*/
 	FILE *fp = fopen("kivik.txt", "a+");
 	
 	if (fp) {
