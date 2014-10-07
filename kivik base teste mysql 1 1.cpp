@@ -5,9 +5,8 @@
 #include <time.h> 
 
 void exibirCabecalho(){
-	printf ("kivik base teste versao 1.0 - MySQL\n");
+	printf ("kivik base teste versao 1.1 - MySQL\n");
 	printf ("Desenvolvido por: Alam Maia da Silva Vianna\n");
-	printf ("Colaboradores: antoniomquadrosfilho\n");
 	printf ("Colaboradores: IRC, servidor RIZON, canal #gold_code\n\n\n");
 }
 
@@ -77,7 +76,7 @@ main (void) {
 	exibirCabecalho();
 	
 
-	FILE *fp = fopen("kivik.txt", "a+");
+	FILE *fp = fopen("kivik.sql", "a+");
 	
 	if (fp) {
 	
@@ -86,7 +85,7 @@ main (void) {
 	//col *aux; 
 	aux = listaDeColunas;
 	while (aux != NULL){
-		fprintf (fp, "\n %s varchar2,", aux -> nome); // versões futuras criar cases para tipo de variavel (recomendavel aqui)
+		fprintf (fp, "\n %s varchar(50),", aux -> nome); // versões futuras criar cases para tipo de variavel (recomendavel aqui)
 		aux = aux -> prox;
 	}
 	
