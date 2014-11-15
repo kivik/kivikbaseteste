@@ -1,14 +1,14 @@
 Funcionamento
 
-Kivik Base Teste MySQL 1.1.
+Kivik Base Teste 2.0.
 
-01. Usuario deve inserir nome da tabela.
-02. Ferramenta gera apenas uma tabela.
-03. Número de colunas é sempre 10 na primeira versão.
+01. Usuario escolhe gerar base para MySQL ou MongoDB
+02. Ferramenta gera apenas uma tabela ou documento.
+03. Número de colunas é sempre 10 no caso do MySQL e variavel no caso do MongoDB.
 04. usuario insere manualmente colunas.
-05. entre cada coluna, deve-se adicionar uma variavel qualquer do tipo char, em versões futuras no lugar desse char ira entrar tipo da coluna
-06. todas as colunas são do tipo varchar(50).
+05. entre cada coluna, deve-se adicionar uma variavel qualquer do tipo char, em versões futuras no lugar desse char ira entrar tipo da coluna, no caso do MySQL.
+06. todas as colunas são do tipo varchar(50), no caso do MySQL.
 07. usuario insere quantos dados devem ser criados.
-08. arquivo chamado kivik.sql é criado.
+08. arquivo chamado kivik.doc é criado.
 
-13:25 07/10/2014
+13:27 15/11/2014

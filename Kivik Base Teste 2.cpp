@@ -5,7 +5,7 @@
 #include <time.h> 
 
 void exibirCabecalho(){
-	printf ("kivik base teste versao 1.1 - MySQL\n");
+	printf ("Kivik Base Teste 2.0\n");
 	printf ("Desenvolvido por: Alam Maia da Silva Vianna\n");
 	printf ("Colaboradores: IRC, servidor RIZON, canal #gold_code\n\n\n");
 }
@@ -22,23 +22,35 @@ main (void) {
 }*listaDeColunas;
 
 	char tabela[50];
+	char documento[50];
 	int qtdColunas=0;
 	int cont;
 	int i, quant_dados;
 	char addcol[50];
     char *tipo;
     char addtipo;
-  //  int i, cont; /*retirado na retirada das funções*/
     col *aux, *novo;
 	
 	srand(time(NULL));
 
-	exibirCabecalho();
+	exibirCabecalho();	
 	
+	FILE *fp = fopen("kivik.doc", "a+");
+
+	int op;
+	do{
+		system ("cls");
+		exibirCabecalho();
+		printf ("0 - Sair sem gerar nenhum dado. \n");
+		printf ("1 - Gerar para MySQL \n");
+		printf ("2 - Gerar para MongoDB \n");
+		
+		scanf ("%d", &op);
+		switch(op){
+			case 1: 
 	printf ("Nome da tabela: "); // versões futuras numero de tabelas será aleatório
 	scanf ("%s", &tabela);
 	
-// cria lista vazia
     listaDeColunas = NULL;
     printf ("\nColunas prontas para serem inseridas");
 
@@ -48,12 +60,10 @@ main (void) {
 	printf ("\nPrimeira coluna eh primary key.\n\n"); 
 	
 	for (cont=0; cont<qtdColunas; cont++){
-    //col *aux, *novo;
 
 	printf ("Digite o nome da coluna: "); // versões futuras nome da coluna será gerado randomicamente
 	scanf ("%s", &addcol);
 	printf ("insira alguma variavel do tipo char: "); // versões futuras poderá escolher tipo da variavel nesse momento
-//        fflush(stdio);
 	scanf ("%s", &tipo);
 
 	novo = (col*)malloc(sizeof(col));
@@ -75,14 +85,10 @@ main (void) {
 	
 	exibirCabecalho();
 	
-
-	FILE *fp = fopen("kivik.sql", "a+");
-	
 	if (fp) {
 	
-	fprintf (fp, "\ncreate table %s (", tabela);
+	fprintf (fp, "\n\n\ncreate table %s (", tabela);
 	
-	//col *aux; 
 	aux = listaDeColunas;
 	while (aux != NULL){
 		fprintf (fp, "\n %s varchar(50),", aux -> nome); // versões futuras criar cases para tipo de variavel (recomendavel aqui)
@@ -99,13 +105,12 @@ main (void) {
 	
 	fprintf (fp, "\ninsert into %s (", tabela);
 	
-//	col *aux; 
 	aux = listaDeColunas;
 
 		while (aux != NULL){
 			if(aux -> prox == NULL){
 				fprintf (fp, "%s) VALUES ( %d, 'kivik%d', 'kivik%d', '%dkivik', 'kivik%d', '%dkivik', 'kivik%d', '%dkivik', 'kivik%d', '%dkivik');"
-				, aux -> nome, i, rand() % 2000, rand() % 2000, rand() % 2000, rand() % 2000, rand() % 2000, rand() % 2000, rand() % 2000, rand() % 2000, rand() % 2000);
+				, aux -> nome, i, rand() % 200000, rand() % 200000, rand() % 200000, rand() % 200000, rand() % 200000, rand() % 200000, rand() % 200000, rand() % 200000, rand() % 200000);
 			}else{
 				fprintf (fp, "%s,", aux -> nome );      
 			}
@@ -114,9 +119,81 @@ main (void) {
 	}
 	fclose(fp);
 	}
-	
-	 getch();
+	getch();
 	return 0;
+			break;
+			case 2: 
+	printf ("Nome do documento: "); // versões futuras numero de documentos será aleatório
+	scanf ("%s", &documento);
+	
+    listaDeColunas = NULL;
+    printf ("\nDocumentos prontas para serem inseridas");
+
+	printf ("\n\nDigite o número de chaves do documento: "); // versões futuras numero de colunas será aleatório
+	scanf ("%d", &qtdColunas);
+	
+	for (cont=0; cont<qtdColunas; cont++){
+
+	printf ("Digite o nome da chave: "); // versões futuras nome da coluna será gerado randomicamente
+	scanf ("%s", &addcol);
+
+	novo = (col*)malloc(sizeof(col));
+	memcpy(novo->nome, addcol, 50);
+	novo->tipo = getchar();
+
+	novo -> prox = NULL;
+	if(listaDeColunas == NULL){
+		listaDeColunas = novo;
+	} else {
+		aux = listaDeColunas;
+		while (aux -> prox != NULL) aux = aux->prox;
+		aux -> prox = novo;
+	} 
+	
+	}
+	
+		cls();
+	
+	exibirCabecalho();
+
+	if (fp) {
+	
+	fprintf (fp, "\n\n\nuse %s;", documento);
+	
+	aux = listaDeColunas;
+	
+	printf ( "insira quantidade de dados a serem criados: ");
+	scanf ("%d", &quant_dados);
+	
+	for (i=quant_dados; i>=1; i--)
+	{
+	
+	fprintf (fp, "\ndb.%s.insert( {", documento);
+	
+	aux = listaDeColunas;
+
+		while (aux != NULL){
+			if(aux -> prox == NULL){
+				fprintf (fp, "%s:\"%dkivik\"});", aux -> nome,  rand() % 200000);
+				break;
+			}else{
+				if (aux == listaDeColunas){
+					fprintf (fp, "%s:\"%d\", ", aux -> nome,  i);
+				}else{
+				fprintf (fp, "%s:\"kivik%d\", ", aux -> nome,  rand() % 200000);      
+			}
+			aux = aux -> prox;
+		}
+	}
+	}
+	fclose(fp);
+	}
+	getch();
+	return 0;
+			break;
+		}
+	} while (op != 0);
+
 }
 
 
